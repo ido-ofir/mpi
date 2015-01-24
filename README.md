@@ -4,7 +4,7 @@
 
 mpi stands for Module Programming Interface and is used by node servers to expose an API through sockets.
 
-    // server.js
+server:
      
     var mpi = require('mpi');
     var io = require('socket.io');
@@ -24,8 +24,9 @@ mpi stands for Module Programming Interface and is used by node servers to expos
         mpi.ok(socket);
     });
 
-    // client.js
+client:
     
+    var socket = io('localhost', {multiplex: true});
     var module = mpi.connect('localhost', function () {
         console.log(module);
     });
