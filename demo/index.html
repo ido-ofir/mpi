@@ -6,9 +6,9 @@
     <script src="socket-io-client.js"></script>
     <script src="../client.mpi.js"></script>
     <script>
-        var module, mpi = Mpi();
-        mpi.connect('localhost', function (mod) {
-            module = mod;
+        var socket = io('localhost', {multiplex: true});
+        var module = mpi.connect(socket, function () {
+            console.log(module);
         });
     </script>
 </head>

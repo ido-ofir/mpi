@@ -94,7 +94,7 @@ function run(socket, msg) {
 	try {
 		msg = JSON.parse(msg);
 		if(msg.method){
-			method = find(msg.method.split('.'), mpi);
+			method = find(msg.method.split('.'), exports.exports);
 			if(method){
 				response =  method.apply(null, msg.args);
 				//if(response.then){}
@@ -110,14 +110,15 @@ function listen(socket, type, listener) {
 		socket.on(type, listener)
 	}
 }
-exports.attach = function(socket){
+exports.ok = function(socket){
 	listen(socket, 'mpi.run', function (msg) {
 		run(socket, msg);
 	});
 	depth = 0;
-	send(socket, 'mpi.ok', map(mpi));
+	send(socket, 'mpi.ok', map(exports.exports));
 	console.log('mpi ok ');
 };
-exports.define = function(name, object){
-	mpi[name] = object;
-};
+setTimeout(function () {
+	console.dir(exports.exports);
+}, 1000);
+exports.exports = {};
