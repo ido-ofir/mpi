@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mpi demo</title>
+    <script src="socket-io-client.js"></script>
+    <script src="../client.mpi.js"></script>
+    <script>
+        var module, mpi = Mpi();
+        mpi.connect('localhost', function (mod) {
+            module = mod;
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
