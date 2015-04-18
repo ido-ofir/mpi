@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>jane tests</title>
+    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="../../index.js"></script>
+    <script src="tests.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="dir.js"></script>
+  </head>
+  <body ng-app="test" ng-controller="appCtrl">
+  <div box class="page">
+    <div box class="tests">
+      <div class="test"
+           ng-repeat="test in tests"
+           ng-click="test.isOpen = !test.isOpen">
+          <div class="test-name">
+            <div flex center class="mark" ng-class="{passed: test.passed === true, failed: test.passed === false}"></div>
+            {{ test.name }}
+          </div>
+          <div class="test-flow" ng-if="test.isOpen">
+            <div class="assertion {{assertion.type}}"
+                 ng-style="{backgroundColor: getColor(assertion.type)}"
+                 ng-repeat="assertion in test.assertions | orderBy : 'id'">
+              <div flex center class="mark" ng-class="{passed: assertion.passed === true, failed: assertion.passed === false}"></div>
+              <div ng-if="isPlain(assertion.msg)"><span ng-if="assertion.origin" class="origin" ng-class="'origin-' + assertion.origin">{{ assertion.origin }}</span>{{ assertion.msg }}</div>
+              <div ng-if="isObject(assertion.msg)">
+                <span ng-if="assertion.origin" class="origin" ng-class="'origin-' + assertion.origin">{{ assertion.origin }}</span>
+                <div ng-repeat="(key, value) in assertion.msg">{{ key }}</div>
+              </div>
+              <div ng-if="isArray(assertion.msg)">
+                <span ng-if="assertion.origin" class="origin" ng-class="'origin-' + assertion.origin">{{ assertion.origin }}</span>
+                <span ng-repeat="item in assertion.msg"> {{ item }}</span>
+              </div>
+              <div flex center class="right">{{ (assertion.time / 1000).toFixed(3) }}</div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div box class="dash">
+      <div class="button" ng-click="run()">Run</div>
+      <div class="button" ng-repeat="type in types" ng-style="{backgroundColor: getColor(type)}">{{ type }}</div>
+    </div>
+  </div>
+  <div class="bottom" flex>
+    <div class="dir-item">
+      <!--<div dir="targetA" root></div>-->
+      <input type="text" ng-model="targetA.stuff"/>
+    </div>
+    <div class="dir-item">
+      <!--<div dir="targetB" root></div>-->
+      <input type="text" ng-model="targetB.stuff"/>
+    </div>
+  </div>
+  </body>
+</html>

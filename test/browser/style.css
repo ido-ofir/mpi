@@ -1,0 +1,156 @@
+body, html{
+    height: 100%;
+    margin:0;
+    font-family: 'Dosis', sans-serif;
+}
+*{
+    box-sizing: border-box;
+}
+[box]{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+[flex]{
+    display: -webkit-flex;
+    display: flex;
+}
+[center]{
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+.page{
+    top:50px;
+    bottom:50px;
+}
+.passed::after{
+    content:'';
+    margin: 10px;
+    width:18px;
+    height:18px;
+    background: url(vx.jpeg) no-repeat top left;
+    background-size: 40px;
+}
+.failed::after{
+    content:'';
+    margin: 10px;
+    width:18px;
+    height:18px;
+    background: url(vx.jpeg) no-repeat top right;
+    background-size: 40px;
+}
+.tests{
+    left: 200px;
+    overflow: auto;
+}
+.test{
+    margin: 10px 10px 10px 30px;
+    border:1px solid #eee;
+    position: relative;
+}
+.mark{
+    position: absolute;
+    top:0;
+    right: 100%;
+    height: 100%;
+
+}
+.test-name{
+    padding: 10px;
+    font-size: 20px;
+    position:relative;
+    cursor:pointer;
+}
+.assertion{
+    padding: 4px;
+    margin-left: 70px;
+    position: relative;
+    border: 1px solid #ddd;
+    border-bottom: 0;
+}
+.log{
+    background-color: orange;
+}
+.right{
+    position: absolute;
+    height: 100%;
+    right: 4px;
+    top: 0;
+    font-size: 14px;
+    z-index: 2;
+}
+.dash{
+    right: auto;
+    width: 200px;
+}
+.button{
+    margin: 20px;
+    height:40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+.assertion.action{
+    font-size: 18px;
+    margin-left: 50px;
+    line-height: 30px;
+}
+[dir]{
+    display: inline;
+    position: relative;
+}
+.dir-item{
+    margin-left: 20px;
+    position: relative;
+}
+.dir-item-object, .dir-item-array{
+     cursor: pointer;
+ }
+[dir]>input{
+    width:100px;
+}
+.dir-item-object::after, .dir-item-array::after{
+    content: '';
+    position: absolute;
+    right: 100%;
+    background: url(arrow.png) no-repeat top left;
+    background-position: 3px 6px;
+    width:19px;
+    height: 19px;
+    top: 0;
+}
+.dir-open::after{
+    background: url(arrow-down.png) no-repeat top left;
+    background-position: 3px 6px;
+}
+.origin{
+    background-color: #fff;
+    padding: 0 6px;
+    border-radius: 4px;
+}
+.origin-server{
+    margin-right: 120px;
+}
+.origin-clientA{
+    margin-left: 40px;
+    margin-right: 80px;
+}
+.origin-clientB{
+    margin-left: 80px;
+    margin-right: 40px;
+}
+.origin-browser{
+    margin-left: 120px;
+}
+.bottom{
+    position: absolute;
+    left:0;
+    right:0;
+    bottom: 0;
+    height:50px;
+}

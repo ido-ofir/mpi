@@ -7,6 +7,7 @@ var SocketServer = require('socket.io');
 var mpi = {};
 var depth = 0;
 var clients = [];
+var listeners = [];
 var engine = 'io';
 var method, data;
 

@@ -1,32 +1,25 @@
 # mpi
 
-# documentation is in progress..
+mpi is a data syncing tool which helps node servers share dynamic data with clients.
 
-mpi stands for Module Programming Interface and is used by node servers to expose an API through sockets.
+install with npm
 
-server:
+    npm install mpi
+
+create a server with some data:
      
     var mpi = require('mpi');
-    var io = require('socket.io');
     
-    // define external API.
-    
-    mpi.exports = {
-        myMethods: function(){
-            return 'are in the server';        
-        }
-    };
-    
-    io.on('connection', function(socket){
-    
-        // when outhenticated, expose to client.
-    
-        mpi.ok(socket);
-    });
+    var server = mpi.Server(8080, { stuff: 5 });
 
-client:
+create a client:
     
-    var socket = io('localhost', {multiplex: true});
-    var module = mpi.connect('localhost', function () {
-        console.log(module);
+    var mpi = require('mpi');
+    
+    mpi.Client('localhost:8080', function(client){
+        
+        console.log(client.stuff);    // 5
+        
     });
+    
+client and server are now identical objects and a change in one of them would reflect in the other.

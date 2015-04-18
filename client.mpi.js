@@ -7,6 +7,10 @@ var mpi = (function(){
         return [].slice.call(args);
     }
 
+    function isString(any) {
+        return typeof any === 'string';
+    }
+
     function isParsed(msg) {
         return typeof msg !== 'string';
     }
@@ -16,7 +20,10 @@ var mpi = (function(){
     }
 
     function listen(socket, type, listener) {
-        if(isIo()){
+        if(!engine){
+
+        }
+        else if(isIo()){
             socket.on(type, listener);
         }
     }
@@ -85,10 +92,30 @@ var mpi = (function(){
 
         function connect(socket, callback) {
 
-            if(isIo()){
+            if(isString(socket)){
+                engine = null;
+                socket = new WebSocket(socket);
+                socket.onopen = onConnect;
+                socket.onclose = onDisconnect;
+                socket.onerror = function (error) {
+                    console.log('WebSocket Error ' + error);
+                };
+                socket.onmessage = function (e) {
+                    try {
+                        var json = JSON.parse(e.data);
+                    }
+                    catch (err) {
+
+                    }
+                    console.log(e.data);
+                };
+            }
+
+            else if(isIo()){
                 socket.on('connect',onConnect);
                 socket.on('disconnect', onDisconnect);
             }
+
 
             socket.json = function(object){
                 if(connected){
@@ -141,6 +168,6 @@ var mpi = (function(){
         return {
             connect: connect
         };
-    }
+    };
     return Mpi();
 }());
